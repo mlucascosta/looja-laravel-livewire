@@ -2,6 +2,32 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Esconde elementos com x-cloak (usado em Alpine.js) */
 [x-cloak] {
     display: none;
+}
+
+/* Tipografia global refinada */
+html {
+    font-family: 'Inter', system-ui, sans-serif;
+    scroll-behavior: smooth;
+}
+
+/* Corrige select múltiplo em iOS/macOS */
+select[multiple] {
+    -webkit-appearance: none;
+}
+
+/* Scrollbar sutil (opcional) */
+::-webkit-scrollbar {
+    width: 8px;
+}
+::-webkit-scrollbar-thumb {
+    background-color: rgba(0, 0, 0, 0.15);
+    border-radius: 8px;
+}
+
+/* Remove focus azul escuro feio em alguns navegadores */
+*:focus {
+    outline: none;
 }

@@ -1,45 +1,50 @@
-<!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+    <!DOCTYPE html>
+    <html lang="pt-BR">
     <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <meta name="csrf-token" content="{{ csrf_token() }}">
+        <meta charset="UTF-8">
+        <title>@yield('title', 'Looja')</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="description" content="Looja – Catálogo de produtos modernos e responsivos.">
 
-        <title>{{ config('app.name', 'Laravel') }}</title>
-
-        <!-- Fonts -->
-        <link rel="preconnect" href="https://fonts.bunny.net">
-        <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
-
-        <!-- Scripts -->
-        @vite(['resources/css/app.css', 'resources/js/app.js'])
-
-        <!-- Styles -->
         @livewireStyles
+        <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+
+        <!-- Fonte Inter (Apple-like) -->
+        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+
+        <style>
+            html {
+                font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+            }
+        </style>
     </head>
-    <body class="font-sans antialiased">
-        <x-banner />
 
-        <div class="min-h-screen bg-gray-100">
-            @livewire('navigation-menu')
-
-            <!-- Page Heading -->
-            @if (isset($header))
-                <header class="bg-white shadow">
-                    <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
-                        {{ $header }}
+    <body class="bg-neutral-50 text-neutral-800 antialiased">
+        <div class="min-h-screen flex flex-col">
+            <!-- Header -->
+            <header class="bg-white/80 backdrop-blur-md shadow-sm sticky top-0 z-20 border-b border-gray-200">
+                <div class="container mx-auto max-w-5xl px-4 py-4 flex items-center justify-between">
+                    <h1 class="text-2xl font-semibold tracking-tight text-neutral-900">🛍️ Looja</h1>
+                    <div class="text-sm text-neutral-500">
+                        {{-- Futuro: menu ou perfil --}}
                     </div>
-                </header>
-            @endif
+                </div>
+            </header>
 
-            <!-- Page Content -->
-            <main>
-                {{ $slot }}
+            <!-- Conteúdo -->
+            <main class="flex-1 container mx-auto max-w-5xl px-4 py-8">
+                @yield('content')
             </main>
+
+            <!-- Footer -->
+            <footer class="bg-white border-t border-gray-200">
+                <div class="container mx-auto max-w-5xl px-4 py-4 text-center text-sm text-neutral-500">
+                    &copy; {{ date('Y') }} Looja. Todos os direitos reservados.
+                </div>
+            </footer>
         </div>
 
-        @stack('modals')
-
-        @livewireScripts
+        {{-- Habilita navegação SPA via wire:navigate --}}
+        @livewireScripts(['navigate' => true])
     </body>
-</html>
+    </html>
