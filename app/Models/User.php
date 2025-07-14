@@ -64,4 +64,9 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+    public function initials(): string
+    {
+        return strtoupper(substr($this->name, 0, 1));
+    }
 }
